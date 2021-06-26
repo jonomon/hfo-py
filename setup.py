@@ -11,7 +11,7 @@ class Build(DistutilsBuild):
         cores_to_use = max(1, multiprocessing.cpu_count()-1)
         try:
             subprocess.check_call(['git', 'clone', 'https://github.com/LARG/HFO.git', 'hfo_py'])
-            subprocess.check_call(['cmake','-DBUILD_SOCCERWINDOW=False -DCMAKE_BUILD_TYPE=RelwithDebInfo'], cwd='hfo_py')
+            subprocess.check_call(['cmake','-DBUILD_SOCCERWINDOW=False', '-DCMAKE_BUILD_TYPE=RelwithDebInfo'], cwd='hfo_py')
             subprocess.check_call(['make', 'install', '-j', str(cores_to_use)], cwd='hfo_py')
         except subprocess.CalledProcessError as e:
             sys.stderr.write("Could not build hfo-py: %s.\n" % e)
